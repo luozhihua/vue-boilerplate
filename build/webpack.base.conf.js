@@ -10,7 +10,7 @@ module.exports = {
   output: {
     path: config.build.assetsRoot,
     publicPath: process.env.NODE_ENV === 'production' ? config.build.assetsPublicPath : config.dev.assetsPublicPath,
-    filename: '[name].js'
+    filename: '[chunkhash:8].js'
   },
   resolve: {
     extensions: ['', '.js', '.vue'],
@@ -47,6 +47,10 @@ module.exports = {
         loader: 'vue'
       },
       {
+        test: /\.less$/,
+        loader: 'less'
+      },
+      {
         test: /\.js$/,
         loader: 'babel',
         include: projectRoot,
@@ -61,7 +65,7 @@ module.exports = {
         loader: 'url',
         query: {
           limit: 10000,
-          name: utils.assetsPath('img/[name].[ext]?[hash:7]')
+          name: utils.assetsPath('img/[hash:8].[ext]')
         }
       },
       {
@@ -69,7 +73,7 @@ module.exports = {
         loader: 'url',
         query: {
           limit: 10000,
-          name: utils.assetsPath('fonts/[name].[ext]?[hash:7]')
+          name: utils.assetsPath('fonts/[hash:8].[ext]')
         }
       }
     ]
@@ -81,7 +85,7 @@ module.exports = {
     loaders: utils.cssLoaders(),
     postcss: [
       require('autoprefixer')({
-        browsers: ['last 2 versions']
+        browsers: ['last 5 versions']
       })
     ]
   }
